@@ -9,6 +9,7 @@ import {
     Modal,
     Platform,
     View,
+    SafeAreaView,
 } from 'react-native';
 
 import {
@@ -733,7 +734,7 @@ export default class ImageView extends Component<PropsType, StateType> {
                 onStartShouldSetResponder={(): boolean => true}
             >
                 <Animated.Image
-                    resizeMode="cover"
+                    resizeMode="contain"
                     source={image.source}
                     style={this.getImageStyle(image, index)}
                     onLoad={(): void => this.onImageLoaded(index)}
@@ -789,17 +790,19 @@ export default class ImageView extends Component<PropsType, StateType> {
                         styles.underlay,
                     ]}
                 />
-                <Animated.View
-                    style={[
-                        styles.header,
-                        {
-                            transform: headerTranslate,
-                        },
-                    ]}
-                >
+                <SafeAreaView>
+                    <Animated.View
+                      style={[
+                         styles.header,
+                            {
+                             transform: headerTranslate,
+                            },
+                      ]}
+                   >
                     {!!close &&
                         React.createElement(close, {onPress: this.close})}
-                </Animated.View>
+                    </Animated.View>
+                </SafeAreaView>
                 <FlatList
                     horizontal
                     pagingEnabled
