@@ -803,7 +803,7 @@ export default class ImageView extends Component<PropsType, StateType> {
                     {!!close &&
                         React.createElement(close, {onPress: this.close})}
                     </Animated.View>
-                    <View>
+                    </View>
                 </SafeAreaView>
                 <FlatList
                     horizontal
