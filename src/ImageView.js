@@ -791,7 +791,7 @@ export default class ImageView extends Component<PropsType, StateType> {
                     ]}
                 />
                 <SafeAreaView>
-                    <View style={{paddingTop:20}}>
+                    <View style={{paddingTop:10}}>
                     <Animated.View
                       style={[
                          styles.header,
