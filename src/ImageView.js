@@ -791,6 +791,7 @@ export default class ImageView extends Component<PropsType, StateType> {
                     ]}
                 />
                 <SafeAreaView>
+                    <View style={{paddingTop:20}}>
                     <Animated.View
                       style={[
                          styles.header,
@@ -802,6 +803,7 @@ export default class ImageView extends Component<PropsType, StateType> {
                     {!!close &&
                         React.createElement(close, {onPress: this.close})}
                     </Animated.View>
+                    <View>
                 </SafeAreaView>
                 <FlatList
                     horizontal
