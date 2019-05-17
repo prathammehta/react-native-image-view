@@ -784,61 +784,63 @@ export default class ImageView extends Component<PropsType, StateType> {
                 onRequestClose={this.close}
                 supportedOrientations={['portrait', 'landscape']}
             >
-                <Animated.View
-                    style={[
-                        {backgroundColor: animatedBackgroundColor},
-                        styles.underlay,
-                    ]}
-                />
-                <SafeAreaView>
-                    <View style={{paddingTop:10}}>
-                    <Animated.View
-                      style={[
-                         styles.header,
-                            {
-                             transform: headerTranslate,
-                            },
-                      ]}
-                   >
-                    {!!close &&
-                        React.createElement(close, {onPress: this.close})}
-                    </Animated.View>
-                    </View>
-                </SafeAreaView>
-                <FlatList
-                    horizontal
-                    pagingEnabled
-                    data={images}
-                    scrollEnabled={scrollEnabled}
-                    scrollEventThrottle={16}
-                    style={styles.container}
-                    ref={this.onFlatListRender}
-                    renderSeparator={() => null}
-                    keyExtractor={this.listKeyExtractor}
-                    onScroll={this.onNextImage}
-                    renderItem={this.renderImage}
-                    getItemLayout={this.getItemLayout}
-                    onMomentumScrollBegin={this.onMomentumScrollBegin}
-                    onMomentumScrollEnd={this.onMomentumScrollEnd}
-                />
-                {prev &&
-                    isPrevVisible &&
-                    React.createElement(prev, {onPress: this.scrollToPrev})}
-                {next &&
-                    isNextVisible &&
-                    React.createElement(next, {onPress: this.scrollToNext})}
-                {renderFooter && (
-                    <Animated.View
-                        style={[styles.footer, {transform: footerTranslate}]}
-                        onLayout={event => {
-                            this.footerHeight = event.nativeEvent.layout.height;
-                        }}
-                    >
-                        {typeof renderFooter === 'function' &&
-                            images[imageIndex] &&
-                            renderFooter(images[imageIndex])}
-                    </Animated.View>
-                )}
+                <Animated.View style={ [{backgroundColor: animatedBackgroundColor}, styles.underlay]}>
+                    <SafeAreaView style={{flex:1}}>
+                        <View style={{flex:1}}>
+                            <Animated.View
+                                style={[
+                                    styles.underlay,
+                                ]}
+                            />
+                            <Animated.View
+                                style={[
+                                    styles.header,
+                                    {
+                                        transform: headerTranslate,
+                                    },
+                                ]}
+                           >
+                           {
+                                !!close &&
+                                React.createElement(close, {onPress: this.close})}
+                            </Animated.View>
+                            <FlatList
+                                horizontal
+                                pagingEnabled
+                                data={images}
+                                scrollEnabled={scrollEnabled}
+                                scrollEventThrottle={16}
+                                style={styles.container}
+                                ref={this.onFlatListRender}
+                                renderSeparator={() => null}
+                                keyExtractor={this.listKeyExtractor}
+                                onScroll={this.onNextImage}
+                                renderItem={this.renderImage}
+                                getItemLayout={this.getItemLayout}
+                                onMomentumScrollBegin={this.onMomentumScrollBegin}
+                                onMomentumScrollEnd={this.onMomentumScrollEnd}
+                            />
+                            {prev &&
+                                isPrevVisible &&
+                                React.createElement(prev, {onPress: this.scrollToPrev})}
+                            {next &&
+                                isNextVisible &&
+                                React.createElement(next, {onPress: this.scrollToNext})}
+                            {renderFooter && (
+                                <Animated.View
+                                    style={[styles.footer, {transform: footerTranslate}]}
+                                    onLayout={event => {
+                                        this.footerHeight = event.nativeEvent.layout.height;
+                                    }}
+                                >
+                                    {typeof renderFooter === 'function' &&
+                                        images[imageIndex] &&
+                                        renderFooter(images[imageIndex])}
+                                </Animated.View>
+                            )}
+                        </View>
+                    </SafeAreaView>
+                </Animated.View>
             </Modal>
         );
     }
