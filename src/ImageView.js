@@ -132,8 +132,6 @@ export default class ImageView extends Component<PropsType, StateType> {
         this.doubleTapTimer = null;
         this.modalAnimation = new Animated.Value(0);
         this.modalBackgroundOpacity = new Animated.Value(0);
-
-        this.headerTranslateValue = new Animated.ValueXY();
         this.footerTranslateValue = new Animated.ValueXY();
 
         this.imageScaleValue = new Animated.Value(this.getInitialScale());
@@ -634,7 +632,6 @@ export default class ImageView extends Component<PropsType, StateType> {
     doubleTapTimer: ?TimeoutID;
     modalAnimation: *;
     modalBackgroundOpacity: *;
-    headerTranslateValue: *;
     footerTranslateValue: *;
     imageScaleValue: *;
     imageTranslateValue: *;
@@ -699,12 +696,6 @@ export default class ImageView extends Component<PropsType, StateType> {
         // toggle footer and header
         this.setState({panelsVisible});
 
-        Animated.timing(this.headerTranslateValue.y, {
-            toValue: !panelsVisible ? -HEADER_HEIGHT : 0,
-            duration: 200,
-            useNativeDriver: true,
-        }).start();
-
         if (this.footerHeight > 0) {
             Animated.timing(this.footerTranslateValue.y, {
                 toValue: !panelsVisible ? this.footerHeight : 0,
@@ -757,7 +748,6 @@ export default class ImageView extends Component<PropsType, StateType> {
 
         const {close, prev, next} = this.getControls();
         const imageInitialScale = this.getInitialScale();
-        const headerTranslate = this.headerTranslateValue.getTranslateTransform();
         const footerTranslate = this.footerTranslateValue.getTranslateTransform();
         const rgbBackgroundColor =
             backgroundColor && isHex(backgroundColor)
@@ -795,9 +785,6 @@ export default class ImageView extends Component<PropsType, StateType> {
                             <Animated.View
                                 style={[
                                     styles.header,
-                                    {
-                                        transform: headerTranslate,
-                                    },
                                 ]}
                            >
                            {
